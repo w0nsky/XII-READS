@@ -1,43 +1,65 @@
-# Astro Starter Kit: Minimal
+# XII – READS
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A small personal project built around a simple reading challenge
+and a space to practice Astro and web design.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+## About
 
-Inside of your Astro project, you'll see the following folders and files:
+**XII – READS** is a personal blog created to document a yearly reading challenge:
+one book per month, twelve books in total.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Each month focuses on a single book with short notes, quotes, and reflections.
+No ratings, no reviews — just a record of reading.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Why this project
 
-Any static assets, like images, can be placed in the `public/` directory.
+This project serves two purposes:
 
-## 🧞 Commands
+- to stay consistent with a monthly reading habit
+- to practice building a clean, content-focused website using Astro
 
-All commands are run from the root of the project, from a terminal:
+It’s intentionally simple and focused on layout, typography, and structure rather than features.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## Tech stack
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Astro
+- HTML
+- CSS
+
+No heavy frameworks, no unnecessary JavaScript.
+
+---
+
+## Design
+
+The design leans toward a minimal, editorial style with a focus on:
+- strong typography
+- clear structure
+- readable layouts
+
+The goal is to keep the site calm and distraction-free.
+
+---
+
+## Getting started
+
+To run the project locally:
+
+```bash
+# clone the repository
+git clone https://github.com/w0nsky/xii-reads.git
+
+# go to the project directory
+cd xii-reads
+
+# install dependencies
+npm install
+
+# start the development server
+npm run dev

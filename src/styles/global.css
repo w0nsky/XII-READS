@@ -1,0 +1,42 @@
+:root{
+  --white:#ffffff;
+  --black: #000000;
+  --grey: #18181b;
+  --yellow: #e2ff00;
+  --red: #dc2626;
+
+  --font-h:"Syncopate", sans-serif;
+  --font-t:"Space Grotesk", sans-serif;
+
+  --border-w:4px;
+}
+
+html {
+  background-color: var(--white);
+  font-family: var(--font-t);
+  color: var(--black);
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+h1,h2,h3,h4,h5{
+  margin: 0;
+}
+@media(min-width:650px){
+  section{
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}

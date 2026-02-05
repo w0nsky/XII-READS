@@ -1,0 +1,17 @@
+---
+const pages = ["home","books","about"];
+---
+<header>
+  <div class="logo">
+    <span>XII-READS</span>
+  </div>
+  <nav>
+    {pages.map((page:string)=>{
+      const url =`/${page}`;
+      return(
+        <a href={url}>{page}</a>
+      );
+    }
+  )}
+  </nav>
+</header>

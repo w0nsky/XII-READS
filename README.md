@@ -11,7 +11,7 @@ and a space to practice Astro and web design.
 one book per month, twelve books in total.
 
 Each month focuses on a single book with short notes, quotes, and reflections.
-No ratings, no reviews — just a record of reading.
+No ratings, no reviews just a record of reading.
 
 ---
 

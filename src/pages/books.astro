@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from 'astro:assets';
+
+const pageTitle = "Books"
+const allBooks = Object.values(import.meta.glob('./books/*.md', { eager: true }));
+---
+<BaseLayout pageTitle = {pageTitle}>
+  <div class="container">
+    <h1>{pageTitle}</h1>
+    <ul>
+    {allBooks.map((book:any)=><li>
+      <a href={book.url}>
+        <h2>{book.frontmatter.name}</h2>
+        <Image src={book.frontmatter.image.url} alt={book.frontmatter.image.alt} />
+      </a>
+      </li>)}
+    </ul>
+  </div>
+</BaseLayout>
+

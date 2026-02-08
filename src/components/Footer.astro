@@ -1,0 +1,141 @@
+---
+const repoLink = "https://github.com/w0nsky/XII-READS"
+const date = new Date();
+const year = date.getFullYear();
+---
+<footer>
+  <div class="container">
+    <div class="mission">
+      <h3>The mission</h3>
+      <p>I read one book a month. I am not a humanist or a big fan of books, but reading has many benefits. I encourage you to take up the challenge and pick up a book. </p>
+      <div class="mission__buttons">
+        <a class="mission__button mission__button-v1 " href={repoLink}>Get repo</a>
+        <a class="mission__button mission__button-v2" href="https://www.goodreads.com/list/show/9440.100_Best_Books_of_All_Time_The_World_Library_List">Top 100 best books</a>
+      </div>
+    </div>
+    <div class="rules">
+      <div class="rules__heading">
+        <img src="/icons/info-circle.svg">
+        Rules of challenge
+      </div>
+        <ol>
+          <li>One Month. One Book.</li>
+          <li>Absolute Focus.</li>
+          <li>No Unread Backlogs.</li>
+          <li>Complete Submission.</li>
+        </ol>
+        <div class="divider"></div>
+        <p class="copyright">© {year} XII READS. MADE BY <a href="https://github.com/w0nsky/">@w0nsky</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer{
+    background: var(--yellow);
+    padding: 5rem 0;
+  }
+
+  footer .container{
+    display: flex;
+    gap:5rem;
+  }
+  .mission,.rules{
+    width: 50%;
+  }
+
+  .mission{
+    text-transform: uppercase;
+  }
+  .mission h3{
+    font-size: 2.25rem;
+    font-family: var(--font-h);
+  }
+  .mission p{
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  .mission__buttons{
+    display: flex;
+    gap:1rem;
+  }
+  .mission__button{
+    padding: 0.75rem 2rem;
+    border: 2px solid var(--black);
+    box-shadow:6px 6px 0px var(--black);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .mission__button-v1{
+    background: var(--white);
+    color: var(--black);
+  }
+  .mission__button-v2{
+    background: var(--red);
+    color: var(--white);
+  }
+  .rules{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
+  }
+  .rules__heading{
+    display: flex;
+    gap:0.5rem;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .rules__heading img{
+    width: 1.5rem;
+  }
+  .rules ol{
+    margin-bottom: 2rem;
+  }
+  .rules ol>li{
+    font-weight: 700;
+    color: var(--grey);
+  }
+
+
+  .divider{
+    height: 2px;
+    background-color: var(--black);
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .copyright{
+    font-size: 0.75rem;
+    margin-top: 2rem;
+    font-weight: 700;
+  }
+  .copyright a{
+    color: var(--red);
+  }
+
+
+  @media(max-width:1200px){
+    footer{
+      padding: 2rem;
+    }
+    footer .container{
+      flex-direction: column;
+    }
+    .mission,.rules{
+      width: 100%;
+    }
+    .rules{
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  }
+  @media(max-width:460px){
+    .mission__buttons{
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

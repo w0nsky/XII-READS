@@ -1,17 +1,227 @@
 ---
 const pages = ["home","books","about"];
 ---
+
 <header>
   <div class="logo">
-    <span>XII-READS</span>
+    <img src="/logo.png" alt="XII READS logo" />
+    <span>XII READS</span>
   </div>
-  <nav>
-    {pages.map((page:string)=>{
-      const url =`/${page}`;
-      return(
-        <a href={url}>{page}</a>
+
+  <nav class="nav-desktop">
+    {pages.map((page) => {
+      const url = `/${page}`;
+      return (
+        <a class="nav-link" href={url}>{page}</a>
       );
-    }
-  )}
+    })}
   </nav>
+  <button
+    class="hamburger"
+    type="button"
+    aria-label="Open menu"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    data-menu-open
+  >
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<div class="overlay" data-menu-overlay></div>
+
+<aside
+  class="drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile menu"
+  tabindex="-1"
+  data-menu-drawer
+>
+  <div class="drawer-top">
+    <button class="close" type="button" aria-label="Close menu" data-menu-close>✕</button>
+  </div>
+
+  <nav class="nav-mobile">
+    {pages.map((page) => {
+      const url = `/${page}`;
+      return (
+        <a class="nav-link mobile" href={url} data-menu-link>{page}</a>
+      );
+    })}
+  </nav>
+</aside>
+
+<script>
+  const body = document.body;
+
+  const openBtn = document.querySelector("[data-menu-open]");
+  const closeBtn = document.querySelector("[data-menu-close]");
+  const overlay = document.querySelector("[data-menu-overlay]");
+  const drawer = document.querySelector("[data-menu-drawer]");
+  const links = document.querySelectorAll("[data-menu-link]");
+
+  const setExpanded = (value) => {
+    if (openBtn) openBtn.setAttribute("aria-expanded", String(value));
+  };
+
+  const openMenu = () => {
+    body.classList.add("is-open");
+    setExpanded(true);
+    body.style.overflow = "hidden";
+    drawer?.focus();
+  };
+
+  const closeMenu = () => {
+    body.classList.remove("is-open");
+    setExpanded(false);
+    body.style.overflow = "";
+    openBtn?.focus();
+  };
+
+  openBtn?.addEventListener("click", openMenu);
+  closeBtn?.addEventListener("click", closeMenu);
+  overlay?.addEventListener("click", closeMenu);
+
+  links.forEach((a) => a.addEventListener("click", closeMenu));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && body.classList.contains("is-open")) closeMenu();
+  });
+</script>
+
+<style>
+  header{
+    display: flex;
+    padding: 20px 50px;
+    background: var(--black);
+    justify-content: space-between;
+    border-bottom: 2px solid var(--white);
+    align-items: center;
+  }
+
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .logo span{
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .logo img{
+    width: 48px;
+  }
+
+  .nav-desktop{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .nav-link{
+    text-decoration: none;
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover{ color: var(--yellow); }
+
+  .hamburger{
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .hamburger span{
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--white);
+    margin: 6px 0;
+  }
+
+  .overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 999;
+  }
+
+  .drawer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    width: min(92vw, 420px);
+    background: var(--black);
+    border-left: 2px solid var(--white);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    z-index: 1000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    outline: none;
+  }
+
+  .drawer-top{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .drawer-title{
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .close{
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  .nav-mobile{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-top: 10px;
+  }
+
+  .nav-link.mobile{
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  :global(body.is-open) .overlay{
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  :global(body.is-open) .drawer{
+    transform: translateX(0);
+  }
+
+  @media(max-width:768px){
+    header{ padding: 20px 10px; }
+    .nav-desktop{ display: none; }
+    .hamburger{ display: block; }
+  }
+</style>

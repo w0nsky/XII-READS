@@ -15,12 +15,14 @@ html {
   background-color: var(--white);
   font-family: var(--font-t);
   color: var(--black);
+  overflow-x: hidden;
 }
 
 body {
   margin: 0 auto;
   width: 100%;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 * {
@@ -39,4 +41,16 @@ h1,h2,h3,h4,h5{
     padding-left: 5rem;
     padding-right: 5rem;
   }
+}
+a{
+  text-decoration: none;
+}
+p{
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
 }

@@ -2,20 +2,135 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from 'astro:assets';
 
-const pageTitle = "Books"
+const pageTitle = "Books Archive"
 const allBooks = Object.values(import.meta.glob('./books/*.md', { eager: true }));
+const images = import.meta.glob('../media/books/*.{jpg,jpeg,webp}',{
+  eager: true,
+  import: 'default'
+});
 ---
 <BaseLayout pageTitle = {pageTitle}>
   <div class="container">
     <h1>{pageTitle}</h1>
     <ul>
-    {allBooks.map((book:any)=><li>
-      <a href={book.url}>
-        <h2>{book.frontmatter.name}</h2>
-        <Image src={book.frontmatter.image.url} alt={book.frontmatter.image.alt} />
-      </a>
-      </li>)}
+    {allBooks.map((book:any)=>{
+
+      const imageKey = Object.keys(images).find((key)=>
+        key.includes(`/${book.frontmatter.cover}.`)
+      );
+      const image = imageKey ? images[imageKey] : 'dupa';
+
+      return(
+        <li>
+          <a href={book.url}>
+            <Image src={image} alt={book.frontmatter.coverAlt} />
+            <div class="book__info">
+              <span>
+                <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M6,22H18a3,3,0,0,0,3-3V7a2,2,0,0,0-2-2H17V3a1,1,0,0,0-2,0V5H9V3A1,1,0,0,0,7,3V5H5A2,2,0,0,0,3,7V19A3,3,0,0,0,6,22ZM5,12.5a.5.5,0,0,1,.5-.5h13a.5.5,0,0,1,.5.5V19a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1Z"></path></g></svg>
+                {book.frontmatter.month}
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                {book.frontmatter.rate} / 10
+                </span>
+            </div>
+            <div class="book__title">
+              <h2>{book.frontmatter.name}</h2>
+            </div>
+          </a>
+        </li>
+      );
+    })}
     </ul>
   </div>
 </BaseLayout>
 
+<style>
+  .container{
+    min-height: 50vh;
+    padding-top: 32px;
+    padding-bottom: 50px;
+  }
+  h1{
+    font-family: var(--font-h);
+    text-transform: uppercase;
+    font-size: 48px;
+  }
+  ul{
+    margin-top: 32px;
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem;
+    list-style-type: none;
+  }
+
+  ul > li > a{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content:space-between;
+    position: relative;
+    min-height: 300px;
+    box-shadow: 6px 6px 0px var(--black);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  ul > li > a:hover{
+    box-shadow: 10px 10px 0px var(--yellow);
+    transform: translate(-2px,2px);
+  }
+
+  ul > li > a > img{
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    top: 0;
+    z-index: -1;
+  }
+
+  .book__title{
+    background: var(--white);
+    width: fit-content;
+    padding: 16px 24px;
+    font-family: var(--font-h);
+    text-transform: uppercase;
+    font-size: 16px;
+    color: var(--black);
+  }
+
+  .book__info{
+    display: flex;
+    gap:12px;
+    padding: 1rem;
+  }
+  .book__info > span{
+    background: var(--white);
+    padding: 4px 8px;
+    text-transform: uppercase;
+    color: var(--black);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    line-height: 1;
+    gap:6px;
+  }
+  .book__info > span > svg{
+    min-width: 20px;
+    width: 20px !important;
+  }
+
+  @media(max-width:768px){
+    h1{
+      font-size: 32px;
+    }
+    .book__title{
+      font-size: 16px;
+    }
+    ul{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
